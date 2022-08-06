@@ -15,7 +15,7 @@ def index(cloud: bool, num_docs: int = NUM_DOCS):
             "/update", docs, show_progress=True, parameters={"traversal_path": "@r"}
         )
     else:
-        flow = Flow.load_config("flows/flow-local.yml")
+        flow = Flow.load_config("flows/flow.yml")
         with flow:
             docs = flow.index(
                 docs, show_progress=True, parameters={"traversal_path": "@r"}
@@ -52,7 +52,7 @@ def serve():
 @click.option("--cloud", "-c", is_flag=True)
 def main(task: str, num_docs: int, cloud: bool):
     if task == "index":
-        index(cloud, num_docs=num_docs)
+        index(cloud=False, num_docs=num_docs)
     elif task == "serve":
         serve()
     elif task == "search_grpc":
