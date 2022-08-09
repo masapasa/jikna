@@ -7,13 +7,15 @@ executors:
   #- name: sentencizer
     #uses: jinahub+docker://SpacySentencizer/v0.6
   - name: encoder
-    uses: jinahub+docker://SpacyTextEncoder/v0.4
+    uses: jinahub://SpacyTextEncoder/v0.4
+    install-requirements: True
     uses_with:
       model_name: 'en_core_web_md'
     resources:
       memory: 8G
   - name: indexer
-    uses: jinahub+docker://AnnLiteIndexer/0.3.0
+    uses: jinahub://AnnLiteIndexer/0.3.0
+    install-requirements: True
     uses_with:
       dim: 300
       columns:

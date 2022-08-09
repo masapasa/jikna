@@ -1,7 +1,7 @@
 HOST = "grpcs://kbstackoverflow-6b2a47012d.wolf.jina.ai"
 
 # Data
-DATA_FILE = "/home/aswin/Data/community.csv"
+DATA_FILE = "/home/aswin/Documents/example-knowledge-base-search/data/Questions.csv"
 TEXT_FIELD = "Title"
 NUM_DOCS = 3000
 
