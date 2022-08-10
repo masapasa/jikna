@@ -19,9 +19,8 @@ executors:
     uses_with:
       dim: 300
       columns:
-        - ['CreationDate', 'float']
-        - ['Score', 'int']
-        - ['IsAcceptedAnswer', 'str']
+        - ['title', 'str']
+        - ['abstract', 'int']
     uses_metas:
       workspace: workspace
     jcloud:
