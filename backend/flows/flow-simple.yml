@@ -1,0 +1,18 @@
+jtype: Flow
+with:
+  protocol: grpc
+executors:
+  - name: indexer
+    uses: jinahub://AnnLiteIndexer/latest
+    install-requirements: True
+    uses_with:
+      dim: 300
+      columns:
+        - ['title', 'str']
+        - ['abstract', 'int']
+    uses_metas:
+      workspace: workspace
+    jcloud:
+      capacity: on-demand
+    resources:
+      memory: 8G

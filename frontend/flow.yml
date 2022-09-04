@@ -6,15 +6,15 @@ executors:
     #uses: jinahub+docker://HtmlStripper/v0.1  # strip html from doc.text
   #- name: sentencizer
     #uses: jinahub+docker://SpacySentencizer/v0.6
-  # - name: encoder
-  #   uses: jinahub://TransformerSentenceEncoder/latest
-  #   pretrained_model_name_or_path: sentence-transformers/paraphrase-mpnet-base-v2
-  #   install-requirements: True
-  #   resources:
-  #     memory: 8G
+  - name: encoder
+    uses: jinahub://SpacyTextEncoder/v0.4
+    install-requirements: True
+    uses_with:
+      model_name: 'en_core_web_md'
+    resources:
+      memory: 8G
   - name: indexer
-    #uses: jinahub://AnnLiteIndexer/0.3.0
-    uses: jinahub://SimpleIndexer/latest
+    uses: jinahub://AnnLiteIndexer/0.3.0
     install-requirements: True
     uses_with:
       dim: 300

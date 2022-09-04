@@ -7,7 +7,7 @@ import click
 def index(num_docs: int = NUM_DOCS):
     print(f"Processing {num_docs} Documents")
     docs = DocumentArray.from_csv(
-        DATA_FILE, field_resolver={TEXT_FIELD: "abstract"}, size=num_docs)
+        DATA_FILE, field_resolver={TEXT_FIELD: "text"}, size=num_docs)
     flow = Flow.load_config("flows/flow.yml")
     with flow:
         docs = flow.index(
@@ -22,6 +22,7 @@ def search_grpc():
         doc = Document(text=query)
         with flow:
             results = flow.search(doc, parameters={"traversal_path": "@r"})
+            
 
         for match in results[0].matches:
             print(match.text)
