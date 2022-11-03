@@ -11,8 +11,8 @@ st.header("🔖 Jina COVID-19 Knowledge Base Search")
 st.sidebar.markdown(sidebar_text)
 
 
-def search_by_text(input, server=HOST):
-    client = Client(host=server)
+def search_by_text(input):
+    client = Client(host="0.0.0.0:65373")
     response = client.search(
         Document(text=input),
         # parameters={"limit": limit},
