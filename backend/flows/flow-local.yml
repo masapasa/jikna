@@ -7,8 +7,10 @@ executors:
     uses: jinahub://HtmlStripper/v0.1  # strip html from doc.text
   - name: sentencizer
     uses: jinahub://SpacySentencizer/v0.6
+    install-requirements: True
   - name: encoder
     uses: jinahub://SpacyTextEncoder/v0.4
+    install-requirements: True
     uses_with:
       model_name: 'en_core_web_md'
   - name: indexer
