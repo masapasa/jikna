@@ -1,0 +1,20 @@
+jtype: Flow
+executors:
+  - name: Encoder
+    uses: jinahub+docker://TransformerSentenceEncoder
+    install_requirements: true
+    gpus: all
+    jcloud:
+      resources:
+        gpu: shared
+  - name: Indexer
+    uses: jinahub+docker://AnnLiteIndexer
+    install_requirements: true
+    uses_with:
+      auth_token: 394396ffc9ab30422923d3eb7c2d9459
+      dim: 384
+    timeout_ready: -1  # slow download speed often leads to timeout
+    jcloud:
+      resources:
+        gpu: 1
+        memory: 16

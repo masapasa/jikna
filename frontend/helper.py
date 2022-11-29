@@ -1,6 +1,6 @@
 from docarray import Document
 from jina import Client
-from config import HOST, DATABASE_FILE
+from config import DATABASE_FILE
 
 result_template = """### {title}
 
@@ -18,8 +18,8 @@ def get_rating(status):
         return "🔴"
 
 
-def search_by_text(input, server=HOST):
-    client = Client(host=server)
+def search_by_text(input):
+    client = Client(host="0.0.0.0:62016")
     response = client.search(
         Document(text=input),
         parameters={"traversal_path": "@r"},

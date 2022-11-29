@@ -4,22 +4,23 @@ from config import DATA_FILE, NUM_DOCS, HOST, TEXT_FIELD
 import click
 
 
-def index(cloud: bool, num_docs: int = NUM_DOCS):
+def index(num_docs: int = NUM_DOCS):
     print(f"Processing {num_docs} Documents")
     docs = DocumentArray.from_csv(
         DATA_FILE, field_resolver={TEXT_FIELD: "text"}, size=num_docs
     )
-    if cloud:
-        client = Client(host=HOST)
-        client.post(
-            "/update", docs, show_progress=True, parameters={"traversal_path": "@r"}
+    # if cloud:
+    #     client = Client(host=HOST)
+    #     client.post(
+    #         "/update", docs, show_progress=True, parameters={"traversal_path": "@r"}
+    #     )
+    # else:
+    flow = Flow.load_config("/home/aswin/documents/papers-search/backend/src/flow.yml")
+    with flow:
+        docs = flow.index(
+            docs, show_progress=True, parameters={"traversal_path": "@r"}
         )
-    else:
-        flow = Flow.load_config("flows/flow-local.yml")
-        with flow:
-            docs = flow.index(
-                docs, show_progress=True, parameters={"traversal_path": "@r"}
-            )
+        flow.block()
 
 
 def search_grpc():
@@ -52,7 +53,7 @@ def serve():
 @click.option("--cloud", "-c", is_flag=True)
 def main(task: str, num_docs: int, cloud: bool):
     if task == "index":
-        index(cloud, num_docs=num_docs)
+        index(num_docs=num_docs)
     elif task == "serve":
         serve()
     elif task == "search_grpc":
